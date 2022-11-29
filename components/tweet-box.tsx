@@ -1,48 +1,29 @@
-import { useState } from "react";
-import {
-  CalculatorIcon,
-  FaceSmileIcon,
-  MagnifyingGlassCircleIcon,
-  MapPinIcon,
-  PhotoIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+import { formatDate } from "@/lib/helpers";
 
-import TweetBoxButton from "@/components/tweet-box-button";
+import type { Tweet } from "@/lib/types";
 
-const TweetBox = () => {
-  const [input, setInput] = useState("");
-
-  return (
-    <div className="flex space-x-4 mt-4">
-      <UserIcon className="w-12 h-12 rounded-full text-gray-400 bg-gray-50 p-2" />
-
-      <form className="flex-1">
-        <textarea
-          placeholder="What's happening?"
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-          className="w-full h-24 bg-gray-100 p-2 rounded-md resize-none mb-2"
-        ></textarea>
-        <div className="flex">
-          <div className="flex space-x-2 flex-1">
-            <TweetBoxButton Icon={PhotoIcon} />
-            <TweetBoxButton Icon={MagnifyingGlassCircleIcon} />
-            <TweetBoxButton Icon={FaceSmileIcon} />
-            <TweetBoxButton Icon={CalculatorIcon} />
-            <TweetBoxButton Icon={MapPinIcon} />
-          </div>
-          <button
-            type="submit"
-            disabled={input.length === 0}
-            className="bg-twitter px-5 py-2 font-bold text-white rounded-full enabled:hover:bg-gray-800 enabled:focus:bg-gray-800 transition-colors duration-200 disabled:opacity-40"
-          >
-            Tweet
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+type Props = {
+  tweet: Tweet;
 };
+
+const TweetBox = ({ tweet }: Props) => (
+  <article className="flex space-x-4 border-t mt-4 pt-4">
+    <img src={tweet.profileImage} alt="" className="w-12 h-12 rounded-full" />
+
+    <div>
+      <div className="flex items-center space-x-1">
+        <p className="font-bold">{tweet.username}</p>
+        <p className="hidden text-sm text-gray-500 sm:block">@{tweet.username.replace(/\s+/g, "").toLowerCase()}</p>
+        <time dateTime={tweet._createdAt} className="text-sm text-gray-500">
+          - {formatDate(tweet._createdAt)}
+        </time>
+      </div>
+
+      <p className="mt-1">{tweet.text}</p>
+
+      {tweet.image && <img src={tweet.image} alt="" className="rounded-lg shadow-md mt-2" />}
+    </div>
+  </article>
+);
 
 export default TweetBox;
