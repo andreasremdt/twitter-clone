@@ -13,7 +13,7 @@ const Home: NextPage = () => {
         <title>Twitter</title>
       </Head>
 
-      <main className="grid grid-cols-9 px-4 mt-4 gap-8">
+      <main className="grid grid-cols-9">
         <Sidebar />
         <Feed />
         <Widgets />

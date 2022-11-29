@@ -12,7 +12,7 @@ import {
 import SidebarRow from "./sidebar-row";
 
 const Sidebar = () => (
-  <nav className="flex flex-col col-span-2 items-center md:items-start">
+  <nav className="flex flex-col col-span-2 items-center md:items-start mt-4 px-4">
     <svg width="48" height="48" viewBox="0 0 32 32" aria-hidden="true" className="w-8 h-8 mb-8 md:ml-3">
       <path
         fill="#1da1f2"
