@@ -1,5 +1,7 @@
 import Head from "next/head";
 
+import Sidebar from "@/components/sidebar";
+
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
@@ -9,7 +11,9 @@ const Home: NextPage = () => {
         <title>Twitter</title>
       </Head>
 
-      <main></main>
+      <main>
+        <Sidebar />
+      </main>
     </div>
   );
 };
