@@ -1,5 +1,7 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
+import TweetBox from "@/components/tweet-box";
+
 const Feed = () => (
   <div className="col-span-7 lg:col-span-5 border-x pt-4 px-4">
     <header className="flex items-center justify-between">
@@ -9,6 +11,8 @@ const Feed = () => (
         <ArrowPathIcon className="w-8 h-8 text-twitter" />
       </button>
     </header>
+
+    <TweetBox />
   </div>
 );
 
