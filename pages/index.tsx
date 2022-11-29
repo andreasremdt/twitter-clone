@@ -8,12 +8,12 @@ import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="max-w-6xl mx-auto max-h-screen overflow-hidden">
       <Head>
         <title>Twitter</title>
       </Head>
 
-      <main>
+      <main className="grid grid-cols-9 px-4 mt-4 gap-8">
         <Sidebar />
         <Feed />
         <Widgets />
