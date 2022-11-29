@@ -1,4 +1,7 @@
+import { ArrowsRightLeftIcon, ArrowUpTrayIcon, ChatBubbleLeftRightIcon, HeartIcon } from "@heroicons/react/24/outline";
+
 import { formatDate } from "@/lib/helpers";
+import TweetBoxButton from "@/components/tweet-box-button";
 
 import type { Tweet } from "@/lib/types";
 
@@ -22,6 +25,13 @@ const TweetBox = ({ tweet }: Props) => (
       <p className="mt-1">{tweet.text}</p>
 
       {tweet.image && <img src={tweet.image} alt="" className="rounded-lg shadow-md mt-2" />}
+
+      <div className="flex justify-between mt-4">
+        <TweetBoxButton Icon={ChatBubbleLeftRightIcon} text="5" />
+        <TweetBoxButton Icon={ArrowsRightLeftIcon} />
+        <TweetBoxButton Icon={HeartIcon} />
+        <TweetBoxButton Icon={ArrowUpTrayIcon} />
+      </div>
     </div>
   </article>
 );

@@ -8,7 +8,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 
-import TweetBoxButton from "@/components/tweet-box-button";
+import TweetFormButton from "@/components/tweet-form-button";
 
 const TweetForm = () => {
   const [input, setInput] = useState("");
@@ -26,11 +26,11 @@ const TweetForm = () => {
         ></textarea>
         <div className="flex">
           <div className="flex space-x-2 flex-1">
-            <TweetBoxButton Icon={PhotoIcon} />
-            <TweetBoxButton Icon={MagnifyingGlassCircleIcon} />
-            <TweetBoxButton Icon={FaceSmileIcon} />
-            <TweetBoxButton Icon={CalculatorIcon} />
-            <TweetBoxButton Icon={MapPinIcon} />
+            <TweetFormButton Icon={PhotoIcon} />
+            <TweetFormButton Icon={MagnifyingGlassCircleIcon} />
+            <TweetFormButton Icon={FaceSmileIcon} />
+            <TweetFormButton Icon={CalculatorIcon} />
+            <TweetFormButton Icon={MapPinIcon} />
           </div>
           <button
             type="submit"
