@@ -18,7 +18,7 @@ it("displays text next to the icon", () => {
   expect(screen.getByRole("button")).toHaveTextContent(/23/i);
 });
 
-it("click handlers are called correctly", async () => {
+it("events are handled properly", async () => {
   const spy = jest.fn();
   const user = userEvent.setup();
 

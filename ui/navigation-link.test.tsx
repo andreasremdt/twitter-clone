@@ -25,7 +25,7 @@ it("renders an icon", () => {
   expect(screen.getByTestId("icon")).toHaveAttribute("aria-hidden", "true");
 });
 
-it("click handlers are called correctly", async () => {
+it("events are handled properly", async () => {
   const spy = jest.fn();
   const user = userEvent.setup();
 

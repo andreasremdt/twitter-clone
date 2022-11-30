@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .grow-wrap::after {
+    @apply invisible whitespace-pre-wrap content-[attr(data-replicated-value)_"_"];
+  }
+
+  .grow-wrap > textarea,
+  .grow-wrap::after {
+    @apply border border-white pt-2 pb-12 px-4;
+
+    grid-area: 1 / 1 / 2 / 2;
+  }
+}

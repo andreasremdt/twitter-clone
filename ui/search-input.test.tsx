@@ -11,7 +11,7 @@ it("renders an input and merges props", () => {
   expect(screen.getByTestId("icon")).toHaveAttribute("aria-hidden", "true");
 });
 
-it("event handlers are called registered", async () => {
+it("events are handled properly", async () => {
   const spy = jest.fn();
   const user = userEvent.setup();
 

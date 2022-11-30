@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 
 import TweetFormButton from "@/components/tweet-form-button";
 import fetchTweets from "@/lib/fetch-tweets";
+import TweetInput from "@/ui/tweet-input";
 
 import type { MouseEvent, FormEvent, SetStateAction, Dispatch } from "react";
 import type { Tweet, TweetBody } from "@/lib/types";
@@ -75,32 +76,32 @@ const TweetForm = ({ setTweets }: Props) => {
   }
 
   return (
-    <div className="flex space-x-4 mt-4">
+    <div className="flex space-x-4 mt-4 px-8 border-b-4 border-slate-200">
       <UserIcon className="w-12 h-12 rounded-full text-gray-400 bg-gray-50 p-2" />
 
-      <form className="flex-1" onSubmit={handleSubmit}>
-        <textarea
-          placeholder="What's happening?"
+      <form className="flex-1 mb-2" onSubmit={handleSubmit}>
+        <TweetInput
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          className="w-full h-24 bg-gray-100 p-2 rounded-md resize-none mb-2"
-        ></textarea>
-        <div className="flex">
-          <div className="flex space-x-2 flex-1">
-            <TweetFormButton onClick={() => setImageDialogOpen(!imageDialogOpen)} Icon={PhotoIcon} />
-            <TweetFormButton Icon={MagnifyingGlassCircleIcon} />
-            <TweetFormButton Icon={FaceSmileIcon} />
-            <TweetFormButton Icon={CalculatorIcon} />
-            <TweetFormButton Icon={MapPinIcon} />
-          </div>
-          <button
-            type="submit"
-            disabled={input.length === 0}
-            className="bg-twitter px-5 py-2 font-bold text-white rounded-full enabled:hover:bg-gray-800 enabled:focus:bg-gray-800 transition-colors duration-200 disabled:opacity-40"
-          >
-            Tweet
-          </button>
-        </div>
+          Controls={
+            <>
+              <div className="flex gap-x-2 mr-auto">
+                <TweetFormButton onClick={() => setImageDialogOpen(!imageDialogOpen)} Icon={PhotoIcon} />
+                <TweetFormButton Icon={MagnifyingGlassCircleIcon} />
+                <TweetFormButton Icon={FaceSmileIcon} />
+                <TweetFormButton Icon={CalculatorIcon} />
+                <TweetFormButton Icon={MapPinIcon} />
+              </div>
+              <button
+                type="submit"
+                disabled={input.length === 0}
+                className="bg-twitter px-5 py-2 font-bold text-white rounded-full enabled:hover:bg-gray-800 enabled:focus:bg-gray-800 transition-colors duration-200 disabled:opacity-40"
+              >
+                Tweet
+              </button>
+            </>
+          }
+        />
 
         {imageDialogOpen && (
           <div className="mt-5 flex rounded-lg bg-twitter/80 py-2 px-4">
