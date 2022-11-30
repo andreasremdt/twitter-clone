@@ -76,7 +76,7 @@ const TweetForm = ({ setTweets }: Props) => {
   }
 
   return (
-    <div className="flex space-x-4 mt-4 px-8 border-b-4 border-slate-200">
+    <div className="flex space-x-4 mt-2 px-8 border-b-4 border-slate-200">
       <UserIcon className="w-12 h-12 rounded-full text-gray-400 bg-gray-50 p-2" />
 
       <form className="flex-1 mb-2" onSubmit={handleSubmit}>
