@@ -10,7 +10,7 @@ import {
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
-import TweetFormButton from "@/components/tweet-form-button";
+import IconButton from "@/ui/icon-button";
 import fetchTweets from "@/lib/fetch-tweets";
 import TweetInput from "@/ui/tweet-input";
 
@@ -85,12 +85,12 @@ const TweetForm = ({ setTweets }: Props) => {
           onChange={(event) => setInput(event.target.value)}
           Controls={
             <>
-              <div className="flex gap-x-2 mr-auto">
-                <TweetFormButton onClick={() => setImageDialogOpen(!imageDialogOpen)} Icon={PhotoIcon} />
-                <TweetFormButton Icon={MagnifyingGlassCircleIcon} />
-                <TweetFormButton Icon={FaceSmileIcon} />
-                <TweetFormButton Icon={CalculatorIcon} />
-                <TweetFormButton Icon={MapPinIcon} />
+              <div className="flex gap-x-1 mr-auto">
+                <IconButton onClick={() => setImageDialogOpen(!imageDialogOpen)} Icon={PhotoIcon} variant="ghost" />
+                <IconButton Icon={MagnifyingGlassCircleIcon} variant="ghost" />
+                <IconButton Icon={FaceSmileIcon} variant="ghost" />
+                <IconButton Icon={CalculatorIcon} variant="ghost" />
+                <IconButton Icon={MapPinIcon} variant="ghost" />
               </div>
               <button
                 type="submit"

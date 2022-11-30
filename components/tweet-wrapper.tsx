@@ -67,8 +67,8 @@ const TweetWrapper = ({ tweet }: Props) => {
             <IconButton Icon={ChatBubbleLeftRightIcon} onClick={() => setCommentBoxVisible(!commentBoxVisible)}>
               {comments.length > 0 && comments.length}
             </IconButton>
-            <IconButton Icon={ArrowsRightLeftIcon} color="green" />
-            <IconButton Icon={HeartIcon} color="red" />
+            <IconButton Icon={ArrowsRightLeftIcon} variant="success" />
+            <IconButton Icon={HeartIcon} variant="danger" />
             <IconButton Icon={ArrowUpTrayIcon} />
           </div>
         }

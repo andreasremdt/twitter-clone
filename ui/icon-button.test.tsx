@@ -32,8 +32,8 @@ it("different variants render different colors", () => {
   const { rerender } = render(<IconButton Icon={UserIcon} />);
 
   expect(screen.getByRole("button")).toHaveClass("hover:text-twitter");
-  rerender(<IconButton Icon={UserIcon} color="green" />);
+  rerender(<IconButton Icon={UserIcon} variant="success" />);
   expect(screen.getByRole("button")).toHaveClass("hover:text-green-700");
-  rerender(<IconButton Icon={UserIcon} color="red" />);
+  rerender(<IconButton Icon={UserIcon} variant="danger" />);
   expect(screen.getByRole("button")).toHaveClass("hover:text-red-700");
 });
