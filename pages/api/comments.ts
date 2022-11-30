@@ -1,5 +1,3 @@
-import { groq } from "next-sanity";
-
 import sanity from "@/lib/sanity-client";
 
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -10,13 +8,14 @@ type Data = {
   comment?: Comment;
 };
 
-const commentQuery = groq`*[_type == "comment" && references(*[_type == "tweet" && _id == $tweetId]._id)] | order(_createdAt desc)`;
+const commentQuery =
+  '*[_type == "comment" && references(*[_type == "tweet" && _id == $tweetId]._id)] | order(_createdAt desc)';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "POST") {
     const data: CommentBody = JSON.parse(req.body);
 
-    const comment: Comment = await sanity.create({
+    const comment: Comment = await sanity.writable.create({
       _type: "comment",
       comment: data.comment,
       username: data.username,
@@ -30,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     res.status(200).json({ comment });
   } else if (req.method === "GET") {
     const { tweetId } = req.query;
-    const comments: Comment[] = await sanity.fetch(commentQuery, {
+    const comments: Comment[] = await sanity.readonly.fetch(commentQuery, {
       tweetId,
     });
     res.status(200).json({ comments });

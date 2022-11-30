@@ -1,17 +1,15 @@
-import { createClient } from "next-sanity";
+import createClient from "@sanity/client";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
-const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
-const token = process.env.SANITY_API_TOKEN;
-const useCdn = process.env.NODE_ENV === "production";
+const config = {
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET,
+  apiVersion: process.env.SANITY_API_VERSION,
+  token: process.env.SANITY_API_TOKEN,
+};
 
-const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn,
-  token,
-});
+const clients = {
+  readonly: createClient({ ...config, useCdn: process.env.NODE_ENV === "production" }),
+  writable: createClient({ ...config, useCdn: false }),
+};
 
-export default client;
+export default clients;
