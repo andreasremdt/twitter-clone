@@ -40,7 +40,7 @@ const Feed = ({ tweets: tweetsProp }: Props) => {
         </button>
       </header>
 
-      <TweetForm />
+      <TweetForm setTweets={setTweets} />
 
       <div>
         {tweets.map((tweet) => (
