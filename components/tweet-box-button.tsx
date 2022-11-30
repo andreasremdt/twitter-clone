@@ -2,7 +2,7 @@ import { SVGProps } from "react";
 
 type Props = {
   Icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
-  text?: string;
+  text?: string | number;
 };
 
 const TweetBoxButton = ({ Icon, text }: Props) => (
