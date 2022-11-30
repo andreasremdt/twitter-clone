@@ -7,11 +7,17 @@ import {
   PhotoIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import { useSession } from "next-auth/react";
 
 import TweetFormButton from "@/components/tweet-form-button";
 
 const TweetForm = () => {
   const [input, setInput] = useState("");
+  const session = useSession();
+
+  if (!session.data) {
+    return null;
+  }
 
   return (
     <div className="flex space-x-4 mt-4">
