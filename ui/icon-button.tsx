@@ -10,7 +10,7 @@ type Props = {
 const IconButton = ({ Icon, children, color = "blue", ...props }: Props) => (
   <button
     type="button"
-    className={cx("text-gray-500 flex items-center text-sm space-x-1 group transition-colors outline-none ", {
+    className={cx("text-gray-500 flex items-center text-sm gap-x-1 group transition-colors outline-none ", {
       "hover:text-twitter focus-visible:text-twitter": color === "blue",
       "hover:text-green-700 focus-visible:text-green-700": color === "green",
       "hover:text-red-700 focus-visible:text-red-700": color === "red",

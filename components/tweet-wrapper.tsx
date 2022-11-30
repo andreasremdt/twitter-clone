@@ -5,16 +5,17 @@ import toast from "react-hot-toast";
 
 import { formatDate } from "@/lib/helpers";
 import fetchComments from "@/lib/fetch-comments";
+import Tweet from "@/ui/tweet";
 
 import type { FormEvent } from "react";
-import type { Comment, CommentBody, Tweet } from "@/lib/types";
+import type { Comment, CommentBody, Tweet as TweetType } from "@/lib/types";
 import IconButton from "@/ui/icon-button";
 
 type Props = {
-  tweet: Tweet;
+  tweet: TweetType;
 };
 
-const TweetBox = ({ tweet }: Props) => {
+const TweetWrapper = ({ tweet }: Props) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentBoxVisible, setCommentBoxVisible] = useState(false);
   const [input, setInput] = useState("");
@@ -58,37 +59,22 @@ const TweetBox = ({ tweet }: Props) => {
   }, []);
 
   return (
-    <article className="border-t mt-4 pt-4">
-      <div className="flex space-x-4">
-        <img src={tweet.profileImage} alt="" className="w-12 h-12 rounded-full" />
-
-        <div>
-          <div className="flex items-center space-x-1">
-            <p className="font-bold">{tweet.username}</p>
-            <p className="hidden text-sm text-gray-500 sm:block">@{tweet.username.replace(/\s+/g, "").toLowerCase()}</p>
-            <time dateTime={tweet._createdAt} className="text-sm text-gray-500">
-              - {formatDate(tweet._createdAt)}
-            </time>
+    <>
+      <Tweet
+        tweet={tweet}
+        Controls={
+          <div className="flex justify-between mt-2">
+            <IconButton Icon={ChatBubbleLeftRightIcon} onClick={() => setCommentBoxVisible(!commentBoxVisible)}>
+              {comments.length > 0 && comments.length}
+            </IconButton>
+            <IconButton Icon={ArrowsRightLeftIcon} color="green" />
+            <IconButton Icon={HeartIcon} color="red" />
+            <IconButton Icon={ArrowUpTrayIcon} />
           </div>
+        }
+      />
 
-          <p className="mt-1">{tweet.text}</p>
-
-          {tweet.image && <img src={tweet.image} alt="" className="rounded-lg shadow-md mt-2" />}
-
-          {session.data && (
-            <div className="flex justify-between mt-4">
-              <IconButton Icon={ChatBubbleLeftRightIcon} onClick={() => setCommentBoxVisible(!commentBoxVisible)}>
-                {comments.length > 0 && comments.length}
-              </IconButton>
-              <IconButton Icon={ArrowsRightLeftIcon} color="green" />
-              <IconButton Icon={HeartIcon} color="red" />
-              <IconButton Icon={ArrowUpTrayIcon} />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {commentBoxVisible && (
+      {/* {commentBoxVisible && (
         <form className="mt-3 flex space-x-3" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -124,9 +110,9 @@ const TweetBox = ({ tweet }: Props) => {
             </div>
           ))}
         </div>
-      )}
-    </article>
+      )} */}
+    </>
   );
 };
 
-export default TweetBox;
+export default TweetWrapper;

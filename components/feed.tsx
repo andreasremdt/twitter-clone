@@ -2,18 +2,18 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 
 import TweetForm from "@/components/tweet-form";
-import TweetBox from "@/components/tweet-box";
+import TweetWrapper from "@/components/tweet-wrapper";
 import fetchTweets from "@/lib/fetch-tweets";
 
-import type { Tweet } from "@/lib/types";
+import type { Tweet as TweetType } from "@/lib/types";
 import { useState } from "react";
 
 type Props = {
-  tweets: Tweet[];
+  tweets: TweetType[];
 };
 
 const Feed = ({ tweets: tweetsProp }: Props) => {
-  const [tweets, setTweets] = useState<Tweet[]>(tweetsProp);
+  const [tweets, setTweets] = useState<TweetType[]>(tweetsProp);
 
   const handleRefresh = async () => {
     const refreshToast = toast.loading("Refreshing...");
@@ -27,7 +27,7 @@ const Feed = ({ tweets: tweetsProp }: Props) => {
   };
 
   return (
-    <div className="col-span-11 md:col-span-9 xl:col-span-7 border-x pt-4 px-4 max-h-screen overflow-scroll">
+    <div className="col-span-11 md:col-span-9 xl:col-span-7 border-x pt-4 max-h-screen overflow-scroll">
       <header className="flex items-center justify-between">
         <h1 className="text-xl font-bold">Home</h1>
 
@@ -44,7 +44,7 @@ const Feed = ({ tweets: tweetsProp }: Props) => {
 
       <div>
         {tweets.map((tweet) => (
-          <TweetBox key={tweet._id} tweet={tweet} />
+          <TweetWrapper key={tweet._id} tweet={tweet} />
         ))}
       </div>
     </div>
