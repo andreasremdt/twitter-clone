@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ tweets }) => (
-  <div className="max-w-6xl mx-auto max-h-screen overflow-hidden">
+  <div>
     <Head>
       <title>Twitter</title>
     </Head>
