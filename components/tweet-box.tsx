@@ -5,10 +5,10 @@ import toast from "react-hot-toast";
 
 import { formatDate } from "@/lib/helpers";
 import fetchComments from "@/lib/fetch-comments";
-import TweetBoxButton from "@/components/tweet-box-button";
 
 import type { FormEvent } from "react";
 import type { Comment, CommentBody, Tweet } from "@/lib/types";
+import IconButton from "@/ui/icon-button";
 
 type Props = {
   tweet: Tweet;
@@ -77,14 +77,12 @@ const TweetBox = ({ tweet }: Props) => {
 
           {session.data && (
             <div className="flex justify-between mt-4">
-              <TweetBoxButton
-                Icon={ChatBubbleLeftRightIcon}
-                text={comments.length}
-                onClick={() => setCommentBoxVisible(!commentBoxVisible)}
-              />
-              <TweetBoxButton Icon={ArrowsRightLeftIcon} />
-              <TweetBoxButton Icon={HeartIcon} />
-              <TweetBoxButton Icon={ArrowUpTrayIcon} />
+              <IconButton Icon={ChatBubbleLeftRightIcon} onClick={() => setCommentBoxVisible(!commentBoxVisible)}>
+                {comments.length > 0 && comments.length}
+              </IconButton>
+              <IconButton Icon={ArrowsRightLeftIcon} color="green" />
+              <IconButton Icon={HeartIcon} color="red" />
+              <IconButton Icon={ArrowUpTrayIcon} />
             </div>
           )}
         </div>
