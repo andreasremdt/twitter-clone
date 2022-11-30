@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { ArrowsRightLeftIcon, ArrowUpTrayIcon, ChatBubbleLeftRightIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 import { formatDate } from "@/lib/helpers";
 import fetchComments from "@/lib/fetch-comments";
 import TweetBoxButton from "@/components/tweet-box-button";
 
-import type { Comment, Tweet } from "@/lib/types";
+import type { FormEvent } from "react";
+import type { Comment, CommentBody, Tweet } from "@/lib/types";
 
 type Props = {
   tweet: Tweet;
@@ -13,10 +16,41 @@ type Props = {
 
 const TweetBox = ({ tweet }: Props) => {
   const [comments, setComments] = useState<Comment[]>([]);
+  const [commentBoxVisible, setCommentBoxVisible] = useState(false);
+  const [input, setInput] = useState("");
+  const session = useSession();
 
   const refreshComments = async () => {
     const comments: Comment[] = await fetchComments(tweet._id);
     setComments(comments);
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const commentBody: CommentBody = {
+      comment: input,
+      username: session.data?.user?.name as string,
+      tweetId: tweet._id,
+      profileImage:
+        "https://media.graphassets.com/resize=fit:clip,height:350,width:350/output=format:webp/c2CgPhdASKmzsywpZct5",
+    };
+
+    const result = await fetch("/api/comments", {
+      body: JSON.stringify(commentBody),
+      method: "POST",
+    });
+
+    const json = await result.json();
+    const newComments = await fetchComments(tweet._id);
+    setComments(newComments);
+
+    toast.success("Comment posted");
+
+    setCommentBoxVisible(false);
+    setInput("");
+
+    return json;
   };
 
   useEffect(() => {
@@ -41,14 +75,35 @@ const TweetBox = ({ tweet }: Props) => {
 
           {tweet.image && <img src={tweet.image} alt="" className="rounded-lg shadow-md mt-2" />}
 
-          <div className="flex justify-between mt-4">
-            <TweetBoxButton Icon={ChatBubbleLeftRightIcon} text={comments.length} />
-            <TweetBoxButton Icon={ArrowsRightLeftIcon} />
-            <TweetBoxButton Icon={HeartIcon} />
-            <TweetBoxButton Icon={ArrowUpTrayIcon} />
-          </div>
+          {session.data && (
+            <div className="flex justify-between mt-4">
+              <TweetBoxButton
+                Icon={ChatBubbleLeftRightIcon}
+                text={comments.length}
+                onClick={() => setCommentBoxVisible(!commentBoxVisible)}
+              />
+              <TweetBoxButton Icon={ArrowsRightLeftIcon} />
+              <TweetBoxButton Icon={HeartIcon} />
+              <TweetBoxButton Icon={ArrowUpTrayIcon} />
+            </div>
+          )}
         </div>
       </div>
+
+      {commentBoxVisible && (
+        <form className="mt-3 flex space-x-3" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Write a comment..."
+            className="flex-1 rounded-lg bg-gray-100 p-2"
+            onChange={(event) => setInput(event.target.value)}
+            value={input}
+          />
+          <button disabled={input.length === 0} type="submit" className="text-twitter disabled:text-gray-200 font-bold">
+            Post
+          </button>
+        </form>
+      )}
 
       {comments.length > 0 && (
         <div className="my-2 mt-5 max-h-44 space-y-5 overflow-y-scroll border-t border-gray-100 p-5">

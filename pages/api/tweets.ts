@@ -15,7 +15,6 @@ const feedQuery = groq`*[_type == "tweet" && !blockTweet] | order(_createdAt des
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "POST") {
     const data: TweetBody = JSON.parse(req.body);
-
     const tweet: Tweet = await sanity.create({
       _type: "tweet",
       text: data.text,
@@ -25,7 +24,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       image: data.image,
     });
 
-    console.log(tweet);
     res.status(200).json({ tweet });
   } else if (req.method === "GET") {
     const tweets: Tweet[] = await sanity.fetch(feedQuery);
