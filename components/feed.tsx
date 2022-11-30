@@ -27,7 +27,7 @@ const Feed = ({ tweets: tweetsProp }: Props) => {
   };
 
   return (
-    <div className="col-span-7 lg:col-span-5 border-x pt-4 px-4 max-h-screen overflow-scroll">
+    <div className="col-span-11 md:col-span-9 xl:col-span-7 border-x pt-4 px-4 max-h-screen overflow-scroll">
       <header className="flex items-center justify-between">
         <h1 className="text-xl font-bold">Home</h1>
 

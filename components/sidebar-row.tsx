@@ -10,10 +10,10 @@ const SidebarRow = ({ title, Icon, onClick }: Props) => (
   <button
     type="button"
     onClick={onClick}
-    className="flex items-center space-x-2 px-4 py-3 rounded-full hover:bg-gray-100 transition-colors duration-200 hover:text-twitter focus:bg-gray-100 focus:text-twitter"
+    className="flex items-center space-x-4 hover:bg-slate-200 transition-colors focus-visible:bg-slate-200 mb-2 px-4 py-3 rounded-full outline-none font-bold lg:text-xl"
   >
-    <Icon className="w-6 h-6" />
-    <span className="hidden md:inline font-light lg:text-xl">{title}</span>
+    <Icon className="w-6 h-6" strokeWidth={2} />
+    <span className="hidden md:inline">{title}</span>
   </button>
 );
 

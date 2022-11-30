@@ -12,7 +12,9 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => (
   <SessionProvider session={session}>
     <Toaster />
 
-    <main className={`${roboto.variable} font-sans max-w-7xl mx-auto px-4`}>
+    <main
+      className={`${roboto.variable} font-sans max-w-[1400px] lg:px-4 px-2 mx-auto grid grid-cols-12 text-slate-800`}
+    >
       <Component {...pageProps} />
     </main>
   </SessionProvider>
